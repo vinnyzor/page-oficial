@@ -1,4 +1,5 @@
 import Marquee from "../ui/marquee";
+import { cn } from "@/functions/cn";
 
 const Companies = () => {
     const responses = [
@@ -19,10 +20,17 @@ const Companies = () => {
                     <Marquee pauseOnHover className="[--duration:20s]">
                         <div className="flex gap-6 justify-center">
                             {responses.map((item, index) => (
-                                <div key={index} className="bg-[#121212] border border-gray-700 shadow-md rounded-md p-4 w-72 h-32 flex flex-col justify-between">
+                                 <figure
+                                 key={index} 
+                                 className={cn(
+                                     "relative w-64 cursor-pointer overflow-hidden rounded-xl border p-4",
+                                     "border-zinc-50/[.1] bg-background over:bg-zinc-50/[.15]",
+                                 )}
+                             >
+                                
                                     <p className="text-sm text-primary font-medium">{item.question}</p>
                                     <p className="text-xs text-white opacity-80">{item.answer}</p>
-                                </div>
+                                    </figure>
                             ))}
                         </div>
                     </Marquee>

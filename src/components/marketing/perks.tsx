@@ -1,14 +1,25 @@
+"use client";
+import { useState } from "react";
 import { PERKS } from "@/constants";
 import { cn } from "@/functions";
 import { LucideIcon } from "lucide-react";
 import Container from "../global/container";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { SectionBadge } from "../ui/section-bade";
+import SectionBadge from "../ui/section-bade";
+import WhatsappDialog from "@/components/WhatsappDialog";
 
 const Perks = () => {
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   return (
-    <div className="flex flex-col items-center justify-center py-12 md:py-16 lg:py-24 w-full">
+    <div id="funciona" className="flex flex-col items-center justify-center pt-12 md:pt-16 lg:pt-24 w-full">
+      {/* Diálogo de WhatsApp */}
+      <WhatsappDialog
+          planTitle="Plano Gratuito"
+          planId="free"
+          isOpen={isDialogOpen}
+          onClose={() => setIsDialogOpen(false)}
+        />
       <Container>
         <div className="flex flex-col items-center text-center max-w-2xl mx-auto">
           <SectionBadge title="Começo Simples" />
@@ -35,8 +46,13 @@ const Perks = () => {
             Pronto para transformar sua gestão financeira?
           </p>
 
-          <Button className="w-fit mx-auto mt-7" asChild size="lg">
-            <Link href="/app">🚀 Comece Agora - Grátis!</Link>
+          <Button
+          onClick={(e) => {
+            e.preventDefault();
+            setIsDialogOpen(true);
+          }}
+          className="w-fit mx-auto mt-7" asChild size="lg">
+            <Link href="">🚀 Comece Agora - Grátis!</Link>
           </Button>
         </div>
       </Container>

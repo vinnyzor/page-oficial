@@ -10,7 +10,6 @@ import SignUpForm from "./auth/signup-form";
 import Hero from "./marketing/hero";
 import Navbar from "./marketing/navbar";
 import Companies from "./marketing/companies";
-import Features from "./marketing/features";
 import Connect from "./marketing/connect";
 import Perks from "./marketing/perks";
 import Pricing from "./marketing/pricing";
@@ -27,7 +26,6 @@ export {
     Hero,
     Navbar,
     Companies,
-    Features,
     Connect,
     Perks,
     Pricing,

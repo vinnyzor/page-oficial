@@ -1,5 +1,10 @@
-import { Background, Companies, Connect, Container, CTA, Features, Hero, Perks, Pricing, Reviews, Wrapper } from "@/components";
+import { Background, Companies, Connect, Container, CTA, Hero, Perks, Pricing, Reviews, Wrapper } from "@/components";
+import { Features2 } from "@/components/marketing/features2";
+import FAQs from "@/components/marketing/faqs";
+import  Features  from "@/components/ui/Features";
 import { Spotlight } from "@/components/ui/spotlight";
+
+
 
 const HomePage = () => {
     return (
@@ -14,14 +19,25 @@ const HomePage = () => {
                 </Container>
                
                 <Connect />
-                <Container className="py-8 lg:py-20">
+                
+                <Perks />
+                <Features />
+                <Container className="pb-16">
                     <Companies />
                 </Container>
-                {/* <Features /> */}
-                <Perks />
-                <Pricing />
+                <Features2/>
+                
                 <Reviews />
+                
+                <Pricing />
+
+                           
+
+                
+                <FAQs/>
+                
                 <CTA />
+                
             </Wrapper>
         </Background>
     )

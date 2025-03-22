@@ -10,9 +10,11 @@ import { Button } from "../ui/button";
 import Menu from "./menu";
 import MobileMenu from "./mobile-menu";
 import Image from "next/image";
+import WhatsappDialog from "@/components/WhatsappDialog";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -66,9 +68,13 @@ const Navbar = () => {
                   size="sm"
                   variant="white"
                   asChild
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsDialogOpen(true);
+                  }}
                   className="hidden sm:flex"
                 >
-                  <Link href="/auth/signup">
+                  <Link href="">
                     Testar Grátis
                     <ArrowRightIcon className="w-4 h-4 ml-2 hidden lg:block" />
                   </Link>
@@ -91,6 +97,14 @@ const Navbar = () => {
           </div>
           <MobileMenu isOpen={isOpen} setIsOpen={setIsOpen} />
         </Wrapper>
+
+        {/* Diálogo de WhatsApp */}
+        <WhatsappDialog
+          planTitle="Plano Gratuito"
+          planId="free"
+          isOpen={isDialogOpen}
+          onClose={() => setIsDialogOpen(false)}
+        />
       </header>
     </div>
   );

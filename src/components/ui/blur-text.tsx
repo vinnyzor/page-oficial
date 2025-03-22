@@ -40,7 +40,7 @@ export const BlurText = ({ word, className, variant, duration = 1 }: BlurIntProp
             variants={combinedVariants}
             className={cn(
                 className,
-                "text-center tracking-[-0.02em] drop-shadow-sm",
+                "text-center font-bold tracking-[-0.02em] drop-shadow-sm",
             )}
         >
             {renderWord()}

@@ -3,43 +3,45 @@ import Container from "../global/container";
 import { Button } from "../ui/button";
 import { Particles } from "../ui/particles";
 import RetroGrid from "../ui/retro-grid";
+import { Input } from "../ui/input";
 
 const CTA = () => {
     return (
         <div className="flex flex-col items-center justify-center py-12 md:py-16 lg:py-24 w-full relative">
-            <Container>
-                <div className="flex flex-col items-center justify-center text-center w-full px-4 md:px-0 mx-auto h-[500px] border border-foreground/10 rounded-3xl overflow-hidden relative">
-                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-12 bg-primary blur-[10rem]"></div>
-                    <div className="flex flex-col items-center justify-center w-full z-20">
-                        <h2 className="text-4xl md:text-6xl font-heading heading font-semibold !leading-tight mt-6">
-                        Simplifique sua<br/>vida financeira hoje
-                        </h2>
-                        <p className="text-base md:text-lg text-center text-accent-foreground/80 max-w-xl mx-auto mt-6">
-                        Gerencie seus gastos, evite surpresas e tome decisões financeiras inteligentes direto do WhatsApp.
-                        </p>
-                        <div className="flex flex-col md:flex-row items-center justify-center w-full gap-6 mt-6">
-                            <Button asChild size="lg" className="w-full md:w-max">
-                                <Link href="">
-                                Comece Agora
-                                </Link>
-                            </Button>
-                            <Button asChild size="lg" variant="secondary" className="w-full md:w-max">
-                                <Link href="">
-                                Saiba Mais
-                                </Link>
-                            </Button>
+            <Container className="relative z-[999999]">
+                    <div className="flex items-center justify-center w-full -mt-40">
+                        <div className="flex flex-col md:flex-row items-start md:items-center justify-start md:justify-between w-full px-4 md:px-8 rounded-lg lg:rounded-2xl border border-border/80 py-4 md:py-8">
+                            <div className="flex flex-col items-start gap-4 w-full">
+                                <h4 className="text-xl md:text-2xl font-semibold">
+                                Receba dicas financeiras direto no WhatsApp!
+                                </h4>
+                                <p className="text-xs max-w-lg text-muted-foreground">
+                                💬 Fique por dentro das melhores estratégias para organizar suas finanças, economizar dinheiro e investir com inteligência. Tudo isso direto no seu WhatsApp!
+                                </p>
+                            </div>
+                            <div className="flex flex-col items-start gap-2 md:min-w-80 mt-5 md:mt-0 w-full md:w-max">
+                                <form action="#" className="flex flex-col md:flex-row items-center gap-2 w-full md:max-w-xs">
+                                    <Input
+                                        required
+                                        type="email"
+                                        placeholder="📩 Digite seu WhatsApp"
+                                        className="focus-visible:ring-0 focus-visible:ring-transparent focus-visible:border-primary duration-300 w-full"
+                                    />
+                                    <Button type="submit" size="sm" variant="secondary" className="w-full md:w-max">
+                                        Quero Receber
+                                    </Button>
+                                </form>
+                                <p className="text-xs text-muted-foreground">
+                                🔒 Ao se inscrever, você concorda com nossa 
+                                    <Link href="#">
+                                    Política de Privacidade
+                                    </Link>
+                                    e recebe atualizações sobre gestão financeira.
+                                </p>
+                            </div>
                         </div>
                     </div>
-                    <RetroGrid />
-                    <Particles
-                        refresh
-                        ease={80}
-                        color="#d4d4d8"
-                        quantity={100}
-                        className="size-full absolute inset-0"
-                    />
-                </div>
-            </Container>
+                </Container>
         </div>
     )
 };

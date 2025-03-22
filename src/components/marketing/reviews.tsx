@@ -1,7 +1,7 @@
 import { REVIEWS } from "@/constants";
 import Container from "../global/container";
 import Marquee from "../ui/marquee";
-import { SectionBadge } from "../ui/section-bade";
+import SectionBadge from "../ui/section-bade";
 import Image from "next/image";
 
 const firstRow = REVIEWS.slice(0, REVIEWS.length / 2);
@@ -16,14 +16,14 @@ const Reviews = () => {
                     <h2 className="text-2xl md:text-4xl lg:text-5xl font-heading font-medium !leading-snug mt-6">
                     📊 Clientes satisfeitos, finanças organizadas
                     </h2>
-                    <p className="text-base md:text-lg text-center text-accent-foreground/80 mt-6">
+                    <p className="text-base md:text-md text-zinc-400 font-normal text-center text-accent-foreground/80 mt-6">
                     Nosso sistema simplifica sua vida financeira. Veja como nossos usuários estão economizando tempo e dinheiro com nossa solução automatizada.
                     </p>
                 </div>
             </Container>
             <Container>
                 <div className="mt-16 w-full relative overflow-hidden">
-                    <div className="relative flex flex-col items-center justify-center overflow-hidden">
+                    <div className="relative flex pt-4 pb-2 flex-col items-center justify-center overflow-hidden">
                         <Marquee pauseOnHover className="[--duration:30s]">
                             {firstRow.map((review) => (
                                 <ReviewCard key={review.username} {...review} />
@@ -36,8 +36,8 @@ const Reviews = () => {
                         </Marquee>
                         <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background"></div>
                         <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-background"></div>
-                        <div className="absolute hidden lg:block top-1/4 left-1/4 w-28 h-28 rounded-full bg-primary/80 -z-10 blur-[6rem]"></div>
-                        <div className="absolute hidden lg:block top-1/4 right-1/4 w-28 h-28 rounded-full bg-primary/80 -z-10 blur-[6rem]"></div>
+                        <div className="absolute hidden lg:block top-2/5 left-1/4 w-20 h-20 rounded-full bg-primary -z-10 blur-[6rem]"></div>
+                        <div className="absolute hidden lg:block top-2/5 right-1/4 w-20 h-20 rounded-full bg-primary -z-10 blur-[6rem]"></div>
                     </div>
                 </div>
             </Container>
