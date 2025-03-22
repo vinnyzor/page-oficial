@@ -4,7 +4,6 @@ import Wrapper from "./global/wrapper";
 import Container from "./global/container";
 import Background from "./global/background";
 
-import SignUpForm from "./auth/signup-form";
 
 import Hero from "./marketing/hero";
 import Navbar from "./marketing/navbar";
@@ -31,5 +30,4 @@ export {
     Reviews,
     CTA,
     Footer,
-    SignUpForm,
 };
