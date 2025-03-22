@@ -1,6 +1,7 @@
 import { Section } from "@/components/core/section/Section";
-import { Link } from "@/lib/intl/navigation";
+
 import Logo from "@/components/core/brand/Logo";
+import Link from "next/link";
 
 export default async function Footer() {
   const year = new Date().getFullYear();
