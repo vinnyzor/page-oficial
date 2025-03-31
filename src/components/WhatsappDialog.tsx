@@ -1,30 +1,52 @@
 "use client";
 
-import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import WhatsappForm from "@/components/CheckoutWithWhatsapp";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import CheckoutWithWhatsapp from "@/components/CheckoutWithWhatsapp";
 
 interface WhatsappDialogProps {
   planTitle: string;
-  planId: string;
+  planId: "individual" | "duo" | "profissional" | "free"; // 👈 Adicionamos 'free'
+  planType: "monthly" | "yearly" | "free"; // 👈 'none' para plano gratuito
   isOpen: boolean;
   onClose: () => void;
 }
 
-const WhatsappDialog: React.FC<WhatsappDialogProps> = ({ planTitle, planId, isOpen, onClose }) => {
+const WhatsappDialog: React.FC<WhatsappDialogProps> = ({
+  planTitle,
+  planId,
+  planType,
+  isOpen,
+  onClose,
+}) => {
+  // 🔁 Traduz o tipo de plano
+  const translatedPeriod =
+    planType === "monthly" ? "mensal" : planType === "yearly" ? "anual" : "";
+
+  const isFree = planId === "free";
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-md">
         <DialogHeader>
           <DialogTitle>{planTitle}</DialogTitle>
           <DialogDescription>
-            Informe seu WhatsApp para começar a usar nosso serviço.
+            Informe seu WhatsApp para continuar.
           </DialogDescription>
         </DialogHeader>
 
-        {/* Formulário de captura do WhatsApp */}
-        <WhatsappForm planTitle={planTitle} planId={planId} onSuccess={onClose} />
+        <CheckoutWithWhatsapp
+  plano={planId}
+  periodo="free"
+  label={`Assinar ${planTitle} ${
+    translatedPeriod ? `(${translatedPeriod})` : ""
+  }`}
+/>
 
       </DialogContent>
     </Dialog>

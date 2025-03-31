@@ -12,14 +12,18 @@ import WhatsappDialog from "@/components/WhatsappDialog";
 const Perks = () => {
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   return (
-    <div id="funciona" className="flex flex-col items-center justify-center pt-12 md:pt-16 lg:pt-24 w-full">
+    <div
+      id="funciona"
+      className="flex flex-col items-center justify-center pt-12 md:pt-16 lg:pt-24 w-full"
+    >
       {/* Diálogo de WhatsApp */}
       <WhatsappDialog
-          planTitle="Plano Gratuito"
-          planId="free"
-          isOpen={isDialogOpen}
-          onClose={() => setIsDialogOpen(false)}
-        />
+        planTitle="Plano Gratuito"
+        planId="free"
+        planType="free"
+        isOpen={isDialogOpen}
+        onClose={() => setIsDialogOpen(false)}
+      />
       <Container>
         <div className="flex flex-col items-center text-center max-w-2xl mx-auto">
           <SectionBadge title="Começo Simples" />
@@ -47,11 +51,14 @@ const Perks = () => {
           </p>
 
           <Button
-          onClick={(e) => {
-            e.preventDefault();
-            setIsDialogOpen(true);
-          }}
-          className="w-fit mx-auto mt-7" asChild size="lg">
+            onClick={(e) => {
+              e.preventDefault();
+              setIsDialogOpen(true);
+            }}
+            className="w-fit mx-auto mt-7"
+            asChild
+            size="lg"
+          >
             <Link href="">🚀 Comece Agora - Grátis!</Link>
           </Button>
         </div>

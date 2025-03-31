@@ -13,8 +13,8 @@ const stripePromise = loadStripe(
 );
 
 interface CheckoutWithWhatsappProps {
-  plano: "individual" | "duo" | "profissional";
-  periodo: "mensal" | "anual";
+  plano: "free" | "individual" | "duo" | "profissional";
+  periodo: "mensal" | "anual" | "free";
   label?: string;
 }
 
@@ -53,6 +53,17 @@ export default function CheckoutWithWhatsapp({
           url: window.location.href,
         }),
       });
+
+      // ✅ Se for plano gratuito, finaliza aqui
+  if (plano === "free") {
+    toast.success("Plano gratuito ativado!", {
+      description: "Você receberá instruções no WhatsApp em breve.",
+      className: "!text-base !p-6 flex items-center !gap-x-4 min-w-fit",
+    });
+
+    setWhatsapp("");
+    return;
+  }
 
       // 🔁 Inicia o Stripe Checkout
       const response = await fetch("/api/checkout", {

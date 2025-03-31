@@ -80,11 +80,12 @@ const Hero = () => {
 
         {/* Diálogo de WhatsApp */}
         <WhatsappDialog
-          planTitle="Plano Gratuito"
-          planId="free"
-          isOpen={isDialogOpen}
-          onClose={() => setIsDialogOpen(false)}
-        />
+ planTitle="Plano Gratuito"
+  planId="free" 
+  planType="free"
+  isOpen={isDialogOpen}
+  onClose={() => setIsDialogOpen(false)}
+/>
       </Container>
     </div>
   );
