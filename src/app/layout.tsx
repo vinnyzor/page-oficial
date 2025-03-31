@@ -19,11 +19,7 @@ export default function RootLayout({
                     satoshi.variable,
                 )}
             >
-                <Toaster
-                    richColors
-                    theme="dark"
-                    position="top-right"
-                />
+              <Toaster />
                
                     {children}
               

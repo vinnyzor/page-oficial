@@ -10,7 +10,7 @@ import Link from "next/link";
 import Container from "../global/container";
 import { Button } from "../ui/button";
 import NumberTicker from "../ui/number-ticker";
-import WhatsappForm from "@/components/WhatsappForm";
+import WhatsappForm from "@/components/CheckoutWithWhatsapp";
 import SectionBadge from "../ui/section-bade";
 import {
   Dialog,
@@ -21,14 +21,12 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Input } from "../ui/input";
+import CheckoutWithWhatsapp from "@/components/CheckoutWithWhatsapp";
 
 type Plan = "monthly" | "yearly";
 
 const Pricing = () => {
   const [selectedPlan, setSelectedPlan] = useState<any | null>(null);
-
-
-
 
   return (
     <>
@@ -92,31 +90,47 @@ const Pricing = () => {
       </div>
 
       <Dialog open={!!selectedPlan} onOpenChange={() => setSelectedPlan(null)}>
-    <DialogContent className="max-w-md">
-        <DialogHeader>
-            <DialogTitle>{selectedPlan?.title}</DialogTitle>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>
+              {selectedPlan?.title}
+              <span className="ml-2 text-sm text-muted-foreground">
+                —{" "}
+                {selectedPlan?.plan === "yearly"
+                  ? "Plano Anual"
+                  : "Plano Mensal"}
+              </span>
+            </DialogTitle>
+
             <DialogDescription>{selectedPlan?.desc}</DialogDescription>
-        </DialogHeader>
+          </DialogHeader>
 
-        <ul className="flex flex-col gap-2 mt-4">
+          <ul className="flex flex-col gap-2 mt-4">
             {selectedPlan?.features?.map((feature: string, index: number) => (
-                <li key={index} className="flex items-center gap-2">
-                    <CheckIcon aria-hidden="true" className="w-5 h-5 text-primary" />
-                    <p className="text-sm md:text-base text-muted-foreground">{feature}</p>
-                </li>
+              <li key={index} className="flex items-center gap-2">
+                <CheckIcon
+                  aria-hidden="true"
+                  className="w-5 h-5 text-primary"
+                />
+                <p className="text-sm md:text-sm text-muted-foreground">
+                  {feature}
+                </p>
+              </li>
             ))}
-        </ul>
+          </ul>
 
-        {/* Formulário reutilizável */}
-        {selectedPlan && (
-            <WhatsappForm
-                planTitle={selectedPlan.title}
-                planId={selectedPlan.id}
-                onSuccess={() => setSelectedPlan(null)}
-            />
-        )}
-    </DialogContent>
-</Dialog>
+          {/* Formulário reutilizável */}
+          {selectedPlan && (
+            <CheckoutWithWhatsapp
+            plano={selectedPlan.id as 'individual' | 'duo' | 'profissional'}
+            periodo={selectedPlan.plan === 'monthly' ? 'mensal' : 'anual'}
+            label={`Assinar ${selectedPlan.title} (${selectedPlan.plan === 'monthly' ? 'Mensal' : 'Anual'})`}
+            // Opcional: chamar algo após sucesso
+          />
+          
+          )}
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
@@ -168,10 +182,10 @@ const Plan = ({
       <div
         className={cn(
           "flex flex-col size-full border rounded-2xl relative p-3 [background-image:linear-gradient(345deg,rgba(255,255,255,0.01)_0%,rgba(255,255,255,0.03)_100%)]",
-          id === "pro" ? "border-primary/80" : "border-border/60"
+          id === "individual" ? "border-primary/80" : "border-border/60"
         )}
       >
-        {id === "pro" && (
+        {id === "individual" && (
           <div className="max-w-fit min-w-min inline-flex items-center whitespace-nowrap px-1 h-7 rounded-full bg-gradient-to-r from-primary to-[#054b43] absolute -top-3 left-1/2 -translate-x-1/2 select-none">
             <span className="flex-1 text-sm px-2 font-medium bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent bg-[length:250%_100%] animate-background-shine">
               Mais Popular
@@ -192,11 +206,17 @@ const Plan = ({
           <div className="flex items-end gap-2">
             <div className="flex items-end gap-1 w-full">
               <span className="text-3xl md:text-4xl font-bold">
-                R$
                 {displayedPrice === 0 ? (
                   0
                 ) : (
-                  <NumberTicker value={displayedPrice} />
+                  <span className="text-3xl md:text-4xl font-bold">
+                    {displayedPrice.toLocaleString("pt-BR", {
+                      style: "currency",
+                      currency: "BRL",
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
+                  </span>
                 )}
               </span>
               {/* In here 120 * 0.8 = 96 and /12 to get monthly price */}
@@ -224,9 +244,9 @@ const Plan = ({
               <li key={index} className="flex items-center gap-2">
                 <CheckIcon
                   aria-hidden="true"
-                  className="w-5 h-5 text-primary"
+                  className="w-5 h-5 min-w-5 min-h-5 text-primary"
                 />
-                <p className="text-sm md:text-base text-muted-foreground">
+                <p className="text-sm md:text-sm text-muted-foreground">
                   {feature}
                 </p>
               </li>
@@ -237,10 +257,10 @@ const Plan = ({
           <Button
             asChild
             onClick={(e) => {
-                e.preventDefault(); // 🔹 Evita que a página role para o topo
-                openDialog({ id, title, desc, features });
+              e.preventDefault(); // 🔹 Evita que a página role para o topo
+              openDialog({ id, title, desc, features, plan });
             }}
-            variant={id === "pro" ? "default" : "tertiary"}
+            variant={id === "individual" ? "default" : "tertiary"}
             className="w-full hover:scale-100 hover:translate-y-0 shadow-none"
           >
             <Link href={""}>{buttonText}</Link>

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import WhatsappForm from "@/components/WhatsappForm";
+import WhatsappForm from "@/components/CheckoutWithWhatsapp";
 
 interface WhatsappDialogProps {
   planTitle: string;
