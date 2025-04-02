@@ -3,82 +3,119 @@ generator client {
 }
 
 datasource db {
-  provider     = "postgresql"
-  url          = env("DATABASE_URL")
-  relationMode = "prisma"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
-
-model contas {
-  id   Int    @id @default(autoincrement())
-  nome String @db.VarChar(100)
-}
-
-model financas {
-  id           Int       @id @default(autoincrement())
-  telefone     String    @db.VarChar(20)
-  nome_financa String    @db.VarChar(255)
-  tipo_financa String    @db.VarChar(10)
-  data_hora    DateTime? @default(now()) @db.Timestamp(6)
-  valor        Decimal   @db.Decimal(10, 2)
-  conta_id     Int
-}
-
-model payments {
-  id              Int      @id @default(autoincrement())
-  userId          Int
-  email           String
-  telefone        String?  @db.VarChar(20)
-  status          String   @default("pending")
-  session_id      String   @unique
-  amount          Decimal  @db.Decimal(10, 2)
-  currency        String   @default("USD") @db.VarChar(3)
-  created_at      DateTime @default(now())
-  price_id        String?  @db.VarChar(100)
-  product_id      String?  @db.VarChar(100)
-  subscription_id String?
-}
-
-model planos {
-  id                Int      @id @default(autoincrement())
-  user_id           Int
-  conta_id          Int
-  payments_id       Int?     @unique
-  inicio            DateTime
-  fim               DateTime
-  periodo_pagamento String   @db.VarChar(20)
-  plano_price_id    Int
-}
-
-model planos_prices {
-  id       Int     @id @default(autoincrement())
-  nome     String
-  periodo  String
-  price_id String
-  valor    Decimal @db.Decimal(10, 2)
-}
-
-model user_contas {
-  user_id  Int
-  conta_id Int
-
-  @@id([user_id, conta_id])
-}
-
-model users {
-  id         Int      @id @default(autoincrement())
-  email      String   @unique
-  telefone   String?  @db.VarChar(20)
-  created_at DateTime @default(now())
-  nome       String   @db.VarChar(25)
-}
-
 
 model Lead {
-  id          String   @id @default(uuid())
-  whatsapp    String
-  plano       String   // ex: 'duo', 'individual'
-  periodo     String   // 'mensal' | 'anual'
-  origem      String   // ex: 'checkout-modal', 'landing', 'form-topo'
-  url         String   // URL de onde o lead foi gerado
-  createdAt   DateTime @default(now())
+  id        String   @id
+  whatsapp  String
+  plano     String
+  periodo   String
+  origem    String
+  url       String
+  createdAt DateTime @default(now())
 }
+
+model Contas {
+  id         Int          @id @default(autoincrement())
+  nome       String       @db.VarChar(100)
+  financas   Financas[]
+  planos     Planos[]
+  userContas UserContas[]
+}
+
+model Financas {
+  id          Int       @id @default(autoincrement())
+  telefone    String    @db.VarChar(20)
+  nomeFinanca String    @db.VarChar(255)
+  tipoFinanca String    @db.VarChar(10)
+  dataHora    DateTime? @default(now()) @db.Timestamp(6)
+  valor       Decimal   @db.Decimal(10, 2)
+  contaId     Int
+  userId      Int?      // Novo campo para relacionamento com Users
+  conta       Contas    @relation(fields: [contaId], references: [id])
+  user        Users?    @relation(fields: [userId], references: [id]) // Nova relação com Users
+
+  @@index([contaId])
+  @@index([userId]) // Novo índice para melhorar performance
+}
+
+model Payments {
+  id             Int      @id @default(autoincrement())
+  userId         Int
+  email          String
+  telefone       String?  @db.VarChar(20)
+  status         String   @default("pending")
+  sessionId      String   @unique
+  amount         Decimal  @db.Decimal(10, 2)
+  currency       String   @default("USD") @db.VarChar(3)
+  createdAt      DateTime @default(now())
+  priceId        String?  @db.VarChar(100)
+  productId      String?  @db.VarChar(100)
+  subscriptionId String?
+  planoId        Int?     @unique
+  user           Users    @relation(fields: [userId], references: [id])
+  plano          Planos?  @relation(fields: [planoId], references: [id])
+
+  @@index([planoId])
+  @@index([userId])
+}
+
+model Planos {
+  id               Int          @id @default(autoincrement())
+  contaId          Int
+  inicio           DateTime
+  fim              DateTime
+  periodoPagamento String       @db.VarChar(20)
+  planoPriceId     Int
+  conta            Contas       @relation(fields: [contaId], references: [id])
+  payments         Payments?
+  userPlanos       UserPlanos[]
+
+  @@index([contaId])
+  @@index([planoPriceId])
+}
+
+model PlanosPrices {
+  id      Int     @id @default(autoincrement())
+  nome    String
+  periodo String
+  priceId String
+  valor   Decimal @db.Decimal(10, 2)
+}
+
+model UserContas {
+  userId  Int
+  contaId Int
+  user    Users  @relation(fields: [userId], references: [id])
+  conta   Contas @relation(fields: [contaId], references: [id])
+
+  @@id([userId, contaId])
+  @@index([contaId])
+  @@index([userId])
+}
+
+model UserPlanos {
+  userId  Int
+  planoId Int
+  user    Users  @relation(fields: [userId], references: [id])
+  plano   Planos @relation(fields: [planoId], references: [id])
+
+  @@id([userId, planoId])
+  @@index([planoId])
+  @@index([userId])
+}
+
+model Users {
+  id         Int          @id @default(autoincrement())
+  email      String       @unique
+  telefone   String?      @db.VarChar(20)
+  createdAt  DateTime     @default(now())
+  nome       String       @db.VarChar(25)
+  payments   Payments[]
+  userContas UserContas[]
+  userPlanos UserPlanos[]
+  financas   Financas[]   // Nova relação com Financas
+}
+

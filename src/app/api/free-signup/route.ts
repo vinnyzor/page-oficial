@@ -1,0 +1,79 @@
+import { PrismaClient } from '@prisma/client'
+import { NextResponse } from 'next/server'
+
+const prisma = new PrismaClient()
+
+export async function POST(request: Request) {
+  try {
+    const body = await request.json()
+    const { email, telefone, nome } = body
+
+    const existingUser = await prisma.users.findFirst({
+      where: {
+        OR: [
+          { email },
+          { telefone }
+        ]
+      }
+    })
+
+    if (existingUser) {
+      return NextResponse.json(
+        { error: 'Já existe um usuário com este e-mail ou telefone.' },
+        { status: 400 }
+      )
+    }
+
+    const user = await prisma.users.create({
+      data: {
+        email,
+        telefone,
+        nome
+      }
+    })
+
+    const conta = await prisma.contas.create({
+      data: {
+        nome: 'Conta Free'
+      }
+    })
+
+    await prisma.userContas.create({
+      data: {
+        userId: user.id,
+        contaId: conta.id
+      }
+    })
+
+    const plano = await prisma.planos.create({
+      data: {
+        contaId: conta.id,
+        planoPriceId: 1,
+        inicio: new Date(),
+        fim: new Date(new Date().setFullYear(new Date().getFullYear() + 100)),
+        periodoPagamento: 'free'
+      }
+    })
+
+    await prisma.userPlanos.create({
+      data: {
+        userId: user.id,
+        planoId: plano.id
+      }
+    })
+
+    return NextResponse.json({
+      message: 'Usuário com plano free criado com sucesso!',
+      user,
+      conta,
+      plano
+    }, { status: 201 })
+
+  } catch (error) {
+    if (error instanceof Error) {
+      return NextResponse.json({ error: error.message }, { status: 500 })
+    }
+
+    return NextResponse.json({ error: 'Erro desconhecido' }, { status: 500 })
+  }
+}
