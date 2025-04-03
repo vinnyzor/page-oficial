@@ -62,6 +62,24 @@ export async function POST(request: Request) {
       }
     })
 
+    fetch('https://8f2d-93-127-136-225.ngrok-free.app/executar', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        nome: nome,
+        email: email,
+        telefone: telefone
+      })
+    })
+      .then(res => res.json())
+      .then(data => console.log('✅ Resposta:', data))
+      .catch(err => console.error('❌ Erro:', err));
+    
+
+    
+
     return NextResponse.json({
       message: 'Usuário com plano free criado com sucesso!',
       user,

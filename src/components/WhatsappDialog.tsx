@@ -41,13 +41,12 @@ const WhatsappDialog: React.FC<WhatsappDialogProps> = ({
         </DialogHeader>
 
         <CheckoutWithWhatsapp
-  plano={planId}
-  periodo="free"
-  label={`Assinar ${planTitle} ${
-    translatedPeriod ? `(${translatedPeriod})` : ""
-  }`}
-/>
-
+          plano={planId}
+          periodo="free"
+          label={`Assinar ${planTitle} ${
+            translatedPeriod ? `(${translatedPeriod})` : ""
+          }`}
+        />
       </DialogContent>
     </Dialog>
   );

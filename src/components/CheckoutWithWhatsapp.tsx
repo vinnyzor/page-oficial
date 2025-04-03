@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { X } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY as string
@@ -25,13 +26,43 @@ export default function CheckoutWithWhatsapp({
 }: CheckoutWithWhatsappProps) {
   const [loading, setLoading] = useState(false);
   const [whatsapp, setWhatsapp] = useState("");
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const router = useRouter();
 
   const handleCheckout = async () => {
     const numeroSemMascara = whatsapp.replace(/\D/g, "");
 
+    function formatarWhatsapp(whatsapp: string): string {
+      let numero = whatsapp.replace(/\D/g, "");
+    
+      // Remove o primeiro "9" do número se tiver 9 dígitos após o DDD
+      if (numero.length === 11 && numero.slice(2, 3) === "9") {
+        numero = numero.slice(0, 2) + numero.slice(3);
+      }
+    
+      // Adiciona o DDI do Brasil
+      return "55" + numero;
+    }
+    
+    const numeroFormatado = formatarWhatsapp(whatsapp);
+
+
+
     if (!numeroSemMascara.match(/^\d{10,14}$/)) {
       toast.error("Número inválido", {
         description: "Por favor, insira um número de WhatsApp válido.",
+        icon: <X className="text-red-500 h-6 w-6" />,
+        className: "!text-base !p-6 flex items-center !gap-x-4 min-w-fit",
+      });
+      return;
+    }
+
+    console.log(numeroSemMascara);
+
+    if (plano === "free" && (!nome.trim() || !email.trim())) {
+      toast.error("Preencha todos os campos", {
+        description: "Nome e e-mail são obrigatórios para o plano gratuito.",
         icon: <X className="text-red-500 h-6 w-6" />,
         className: "!text-base !p-6 flex items-center !gap-x-4 min-w-fit",
       });
@@ -46,7 +77,7 @@ export default function CheckoutWithWhatsapp({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          whatsapp: numeroSemMascara,
+          whatsapp: numeroFormatado,
           plano,
           periodo,
           origem: "checkout-component",
@@ -55,15 +86,37 @@ export default function CheckoutWithWhatsapp({
       });
 
       // ✅ Se for plano gratuito, finaliza aqui
-  if (plano === "free") {
-    toast.success("Plano gratuito ativado!", {
-      description: "Você receberá instruções no WhatsApp em breve.",
-      className: "!text-base !p-6 flex items-center !gap-x-4 min-w-fit",
-    });
-
-    setWhatsapp("");
-    return;
-  }
+      if (plano === "free") {
+        const response = await fetch("/api/free-user", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            telefone: numeroFormatado,
+            nome,
+            email,
+            plano,
+            periodo,
+            origem: "checkout-component",
+            url: window.location.href,
+          }),
+        });
+      
+        const data = await response.json();
+      
+        if (!response.ok) {
+          toast.error("Erro ao ativar plano gratuito", {
+            description: data.error || "Erro desconhecido.",
+            icon: <X className="text-red-500 h-6 w-6" />,
+            className: "!text-base !p-6 flex items-center !gap-x-4 min-w-fit",
+          });
+          return;
+        }
+      
+        // Sucesso: redireciona
+        router.push("/aprovado");
+        return;
+      }
+      
 
       // 🔁 Inicia o Stripe Checkout
       const response = await fetch("/api/checkout", {
@@ -100,6 +153,24 @@ export default function CheckoutWithWhatsapp({
 
   return (
     <div className="flex flex-col gap-3 mt-4 w-full">
+      {plano === "free" && (
+        <>
+          <Input
+            type="text"
+            placeholder="Seu nome"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+            required
+          />
+          <Input
+            type="email"
+            placeholder="Seu e-mail"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </>
+      )}
       <InputMask
         mask="(99) 99999-9999"
         value={whatsapp}
