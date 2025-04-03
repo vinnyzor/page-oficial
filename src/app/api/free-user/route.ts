@@ -62,7 +62,7 @@ export async function POST(request: Request) {
       }
     })
 
-    fetch('https://8f2d-93-127-136-225.ngrok-free.app/executar', {
+    await fetch('https://8f2d-93-127-136-225.ngrok-free.app/executar', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
