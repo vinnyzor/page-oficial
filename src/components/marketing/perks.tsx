@@ -31,8 +31,7 @@ const Perks = () => {
             Como Funciona
           </h2>
           <p className="text-base md:text-lg max-w-lg text-center text-accent-foreground/80 mt-2">
-            💡 Automatize suas finanças em poucos passos e tenha total controle
-            do seu dinheiro.
+          Comece em menos de 1 minuto e veja resultados já no 1º mês. O ZapFinance cuida das suas finanças, você cuida do que importa.
           </p>
         </div>
       </Container>
@@ -47,7 +46,7 @@ const Perks = () => {
 
         <div className="mt-8 w-full mx-auto flex flex-col justify-center">
           <p className="text-base md:text-md text-center text-accent-foreground/80 mt-6">
-            Pronto para transformar sua gestão financeira?
+          Quanto antes você começar, mais rápido seu dinheiro começa a trabalhar por você.
           </p>
 
           <Button
@@ -59,7 +58,7 @@ const Perks = () => {
             asChild
             size="lg"
           >
-            <Link href="">🚀 Comece Agora - Grátis!</Link>
+            <Link href="">🚀 Comece Agora – Grátis e Sem Compromisso</Link>
           </Button>
         </div>
       </Container>

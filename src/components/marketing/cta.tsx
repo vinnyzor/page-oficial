@@ -13,10 +13,10 @@ const CTA = () => {
                         <div className="flex flex-col md:flex-row items-start md:items-center justify-start md:justify-between w-full px-4 md:px-8 rounded-lg lg:rounded-2xl border border-border/80 py-4 md:py-8">
                             <div className="flex flex-col items-start gap-4 w-full">
                                 <h4 className="text-xl md:text-2xl font-semibold">
-                                Receba dicas financeiras direto no WhatsApp!
+                                Dicas financeiras que realmente fazem diferença — direto no seu WhatsApp
                                 </h4>
                                 <p className="text-xs max-w-lg text-muted-foreground">
-                                💬 Fique por dentro das melhores estratégias para organizar suas finanças, economizar dinheiro e investir com inteligência. Tudo isso direto no seu WhatsApp!
+                                💬 Aprenda a economizar, investir e organizar sua grana sem complicação. Conteúdo prático, rápido e gratuito.
                                 </p>
                             </div>
                             <div className="flex flex-col items-start gap-2 md:min-w-80 mt-5 md:mt-0 w-full md:w-max">
@@ -28,7 +28,7 @@ const CTA = () => {
                                         className="focus-visible:ring-0 focus-visible:ring-transparent focus-visible:border-primary duration-300 w-full"
                                     />
                                     <Button type="submit" size="sm" variant="secondary" className="w-full md:w-max">
-                                        Quero Receber
+                                    Quero Economizar
                                     </Button>
                                 </form>
                                 <p className="text-xs text-muted-foreground">

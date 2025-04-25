@@ -20,20 +20,38 @@ model Lead {
 model Contas {
   id         Int          @id @default(autoincrement())
   nome       String       @db.VarChar(100)
+  tipo       String       @default("pessoal")
   financas   Financas[]
-  planos     Planos[]
+  alertas    Alertas[]
+  metas      Metas[]
   userContas UserContas[]
+  PlanoContas PlanoContas[]
 }
+
+
+model PlanoContas {
+  planoId  Int
+  contaId  Int
+  Planos   Planos @relation(fields: [planoId], references: [id])
+  Contas   Contas @relation(fields: [contaId], references: [id])
+
+  @@id([planoId, contaId])
+  @@index([planoId])
+  @@index([contaId])
+}
+
 
 model Financas {
   id          Int       @id @default(autoincrement())
   telefone    String    @db.VarChar(20)
   nomeFinanca String    @db.VarChar(255)
   tipoFinanca String    @db.VarChar(10)
+  categoria   String    @db.VarChar(40)
   dataHora    DateTime? @default(now()) @db.Timestamp(6)
+  data        DateTime? @db.Date
   valor       Decimal   @db.Decimal(10, 2)
   contaId     Int
-  userId      Int?      // Novo campo para relacionamento com Users
+  userId      Int? // Novo campo para relacionamento com Users
   conta       Contas    @relation(fields: [contaId], references: [id])
   user        Users?    @relation(fields: [userId], references: [id]) // Nova relação com Users
 
@@ -64,16 +82,15 @@ model Payments {
 
 model Planos {
   id               Int          @id @default(autoincrement())
-  contaId          Int
   inicio           DateTime
   fim              DateTime
   periodoPagamento String       @db.VarChar(20)
   planoPriceId     Int
-  conta            Contas       @relation(fields: [contaId], references: [id])
   payments         Payments?
   userPlanos       UserPlanos[]
+  PlanoContas      PlanoContas[]
 
-  @@index([contaId])
+
   @@index([planoPriceId])
 }
 
@@ -110,12 +127,53 @@ model UserPlanos {
 model Users {
   id         Int          @id @default(autoincrement())
   email      String       @unique
+  perfil     String?   
   telefone   String?      @db.VarChar(20)
   createdAt  DateTime     @default(now())
   nome       String       @db.VarChar(25)
   payments   Payments[]
   userContas UserContas[]
   userPlanos UserPlanos[]
-  financas   Financas[]   // Nova relação com Financas
+  alertas    Alertas[]
+  financas   Financas[] // Nova relação com Financas
+  metas      Metas[]
 }
 
+model Metas {
+  id         Int      @id @default(autoincrement())
+  nome       String   @db.VarChar(100)
+  descricao  String?  @db.VarChar(255)
+  valor      Decimal  @db.Decimal(10, 2)
+  acumulado  Decimal  @default(0.00) @db.Decimal(10, 2)
+  dataLimite DateTime
+  concluida  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  userId  Int?
+  contaId Int?
+
+  Users  Users?  @relation(fields: [userId], references: [id])
+  Contas Contas? @relation(fields: [contaId], references: [id])
+
+  @@index([userId])
+  @@index([contaId])
+}
+
+model Alertas {
+  id         Int      @id @default(autoincrement())
+  titulo     String   @db.VarChar(100)
+  descricao  String?  @db.VarChar(255)
+  dataAlerta DateTime
+  recorrente Boolean  @default(false)
+  intervalo  String?  @db.VarChar(20) // Ex: "mensal", "semanal", etc.
+  createdAt  DateTime @default(now())
+
+  userId  Int
+  contaId Int?
+
+  Users  Users   @relation(fields: [userId], references: [id])
+  Contas Contas? @relation(fields: [contaId], references: [id])
+
+  @@index([userId])
+  @@index([contaId])
+}

@@ -9,7 +9,7 @@ import { Spotlight } from "@/components/ui/spotlight";
 const HomePage = () => {
     return (
         <Background>
-            <Wrapper className="py-20 relative">
+            <Wrapper className="py-10 relative">
                 <Container className="relative">
                     <Spotlight
                         className="-top-40 left-0 md:left-60 md:-top-20"

@@ -56,14 +56,14 @@ const Navbar = () => {
             </div>
             <div className="items-center flex gap-2 lg:gap-4">
               <>
-                <Button
+                {/* <Button
                   size="sm"
                   variant="tertiary"
                   asChild
                   className="hover:translate-y-0 hover:scale-100"
                 >
                   <Link href="/auth/signin">Acessar</Link>
-                </Button>
+                </Button> */}
                 <Button
                   size="sm"
                   variant="white"

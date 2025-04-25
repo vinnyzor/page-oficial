@@ -7,13 +7,13 @@ const Connect = () => {
     return (
         <div className="flex flex-col items-center justify-center py-8 md:py-12 w-full">
             <Container>
-                <div className="flex flex-col items-center text-center max-w-2xl mx-auto">
+                <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
                     <SectionBadge title="IA Que Trabalha Para Você" />
                     <h2 className="text-2xl md:text-4xl lg:text-5xl font-heading font-medium !leading-snug mt-6">
-                    Integração Inteligente entre Você e Suas Finanças
+                    IA que entende sua rotina financeira – e trabalha por você.
                     </h2>
                     <p className="text-base md:text-lg text-center text-accent-foreground/80 mt-6">
-                    Nosso assistente financeiro com IA conecta você diretamente à sua vida financeira, permitindo controle total, previsões inteligentes e insights personalizados.
+                    Nosso assistente financeiro com IA conecta você às suas metas, hábitos e desafios. Receba alertas, previsões e conselhos personalizados para transformar sua relação com o dinheiro.
                     </p>
                 </div>
             </Container>

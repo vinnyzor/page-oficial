@@ -45,10 +45,10 @@ export default function FAQs() {
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
           <SectionBadge title="Dúvidas Frequentes" />
           <h2 className="text-2xl md:text-4xl max-w-lg lg:text-5xl font-heading font-medium !leading-snug mt-6">
-            A resposta que você procura está aqui!
+          Tá com dúvida? A gente resolve aqui.
           </h2>
           <p className="text-sm pb-12 max-w-xl md:text-sm text-center text-accent-foreground/80 mt-6">
-            Tire suas dúvidas sobre como nosso assistente financeiro pode ajudar você a gerenciar seu dinheiro de forma fácil e segura.
+          Veja as perguntas mais frequentes e entenda como o nosso assistente pode facilitar sua rotina financeira — sem complicação.
           </p>
         </div>
 

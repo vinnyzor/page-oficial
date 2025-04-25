@@ -6,31 +6,31 @@ export const PERKS = [
     {
         icon: UserPlus,
         title: "Cadastre-se Gratuitamente",
-        description: "Comece em segundos sem precisar baixar nenhum aplicativo."
+        description: "Comece em segundos. Sem baixar nada, sem burocracia."
     },
     {
         icon: MessageCircle,
         title: "Conecte-se pelo WhatsApp",
-        description: "Nosso assistente financeiro interage diretamente com você, sem complicação."
+        description: "Nossa IA conversa com você direto no WhatsApp e entende seu estilo de vida financeiro."
     },
     {
         icon: ClipboardList,
         title: "Registre suas Finanças com Facilidade",
-        description: "Envie mensagens de texto ou áudio para adicionar receitas e despesas."
+        description: "Mande uma mensagem de texto ou áudio. O assistente cuida do resto."
     },
     {
         icon: ChartSplineIcon,
         title: "Receba Relatórios Automáticos",
-        description: "Acompanhe seu saldo, previsões de gastos e insights personalizados."
+        description: "Descubra onde seu dinheiro vai, veja seu saldo e acompanhe previsões semanais."
     },
     {
         icon: BellRing,
         title: "Configure Alertas Inteligentes",
-        description: "Nunca mais perca um vencimento! Receba lembretes de contas e gastos."
+        description: "Receba lembretes antes dos vencimentos. Diga adeus às multas e esquecimentos."
     },
     {
         icon: CreditCard,
-        title: "Automação e Pagamentos (Plano Profissional e Empresarial)",
-        description: "Realize pagamentos de boletos e Pix diretamente pelo WhatsApp."
+        title: "Seu Consultor Financeiro 24/7 no WhatsApp",
+        description: "Nosso assistente com IA não dorme, não esquece e não te deixa perder prazos."
     },
 ];

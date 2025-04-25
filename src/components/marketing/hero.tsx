@@ -32,16 +32,12 @@ const Hero = () => {
         </div>
       </Container>
       <BlurText
-        word={"Seu Controle Financeiro, Automatizado e Inteligente."}
+        word={"Pare de perder dinheiro sem saber pra onde ele vai."}
         className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl bg-gradient-to-br from-foreground to-foreground/60 bg-clip-text text-transparent py-2 md:py-0 lg:!leading-snug font-medium racking-[-0.0125em] mt-6 font-heading"
       />
       <Container delay={0.1}>
         <p className="text-sm sm:text-base lg:text-lg mt-4 text-accent-foreground/60 max-w-2xl mx-auto">
-          Gerencie suas finanças de forma simples, eficiente e 100% pelo
-          WhatsApp.{" "}
-          <span className="hidden sm:inline">
-            Chega de planilhas e esquecimentos.
-          </span>
+        Chega de planilhas! Organize, pague, economize e planeje — tudo em poucos cliques via WhatsApp.{" "}
         </p>
       </Container>
       <Container delay={0.2}>
@@ -54,7 +50,7 @@ const Hero = () => {
             asChild
             size="lg"
           >
-            <Link href="/app">🚀 Teste Grátis Agora</Link>
+            <Link href="/app">🚀 Comece grátis</Link>
           </Button>
         </div>
       </Container>

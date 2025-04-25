@@ -38,11 +38,10 @@ const Pricing = () => {
           <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
             <SectionBadge title="Escolha seu plano" />
             <h2 className="text-2xl md:text-4xl lg:text-5xl font-heading font-medium !leading-snug mt-6">
-              Preços simples e transparentes
+            Tudo o que você precisa, por um valor que cabe no seu bolso
             </h2>
             <p className="text-base max-w-2xl md:text-lg text-center text-accent-foreground/80 mt-6">
-              Escolha o plano ideal para sua organização financeira. Sem taxas
-              escondidas, sem surpresas.
+            Escolha um plano que acompanha seu momento — e evolui com você. Automatize, organize e economize.
             </p>
           </div>
         </Container>

@@ -14,10 +14,10 @@ const Reviews = () => {
                 <div className="flex flex-col items-center text-center max-w-2xl mx-auto">
                     <SectionBadge title="Foco na Eficiência" />
                     <h2 className="text-2xl md:text-4xl lg:text-5xl font-heading font-medium !leading-snug mt-6">
-                    📊 Clientes satisfeitos, finanças organizadas
+                    O primeiro passo para uma vida financeira mais leve
                     </h2>
                     <p className="text-base md:text-md text-zinc-400 font-normal text-center text-accent-foreground/80 mt-6">
-                    Nosso sistema simplifica sua vida financeira. Veja como nossos usuários estão economizando tempo e dinheiro com nossa solução automatizada.
+                    Veja como nossos usuários estão conquistando mais tranquilidade e autonomia com uma gestão automatizada.
                     </p>
                 </div>
             </Container>

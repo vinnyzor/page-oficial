@@ -47,7 +47,6 @@ export async function POST(request: Request) {
 
     const plano = await prisma.planos.create({
       data: {
-        contaId: conta.id,
         planoPriceId: 1,
         inicio: new Date(),
         fim: new Date(new Date().setFullYear(new Date().getFullYear() + 100)),
@@ -55,6 +54,14 @@ export async function POST(request: Request) {
       }
     })
 
+    await prisma.planoContas.create({
+      data: {
+        contaId: conta.id, // Relacionando a conta ao plano
+        planoId: plano.id, // Relacionando o plano à conta
+      },
+    });
+
+    
     await prisma.userPlanos.create({
       data: {
         userId: user.id,
