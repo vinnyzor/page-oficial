@@ -8,6 +8,8 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import SectionBadge from "../ui/section-bade";
 import WhatsappDialog from "@/components/WhatsappDialog";
+import { IconType } from "react-icons";
+import { ComponentType, SVGProps } from "react";
 
 const Perks = () => {
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
@@ -74,7 +76,7 @@ const Perk = ({
 }: {
   title: string;
   description: string;
-  icon: LucideIcon;
+  icon: ComponentType<SVGProps<SVGSVGElement>>;
   index: number;
 }) => {
   return (

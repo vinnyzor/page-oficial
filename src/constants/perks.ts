@@ -1,6 +1,7 @@
 import { Icons } from "@/components";
-import { ChartSplineIcon, UserPlus, MessageCircle, ClipboardList, BellRing, CreditCard } from "lucide-react";
-import React from "react";
+import { ChartSplineIcon, UserPlus, BellRing, CreditCard, FileText } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
+import { FiClock } from "react-icons/fi";
 
 export const PERKS = [
     {
@@ -9,12 +10,12 @@ export const PERKS = [
         description: "Comece em segundos. Sem baixar nada, sem burocracia."
     },
     {
-        icon: MessageCircle,
+        icon: FaWhatsapp,
         title: "Conecte-se pelo WhatsApp",
         description: "Nossa IA conversa com você direto no WhatsApp e entende seu estilo de vida financeiro."
     },
     {
-        icon: ClipboardList,
+        icon: FileText,
         title: "Registre suas Finanças com Facilidade",
         description: "Mande uma mensagem de texto ou áudio. O assistente cuida do resto."
     },
@@ -29,7 +30,7 @@ export const PERKS = [
         description: "Receba lembretes antes dos vencimentos. Diga adeus às multas e esquecimentos."
     },
     {
-        icon: CreditCard,
+        icon: FiClock,
         title: "Seu Consultor Financeiro 24/7 no WhatsApp",
         description: "Nosso assistente com IA não dorme, não esquece e não te deixa perder prazos."
     },
