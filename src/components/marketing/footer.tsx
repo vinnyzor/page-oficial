@@ -13,15 +13,14 @@ import WhatsappDialog from "@/components/WhatsappDialog";
 const Footer = () => {
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   return (
-    <footer className="w-full py-10 border-t border-border relative">
-    
-<WhatsappDialog
- planTitle="Plano Gratuito"
-  planId="free"
-  planType="free" 
-  isOpen={isDialogOpen}
-  onClose={() => setIsDialogOpen(false)}
-/>
+    <footer className="w-full px-4 md:px-0 py-10 border-t border-border relative">
+      <WhatsappDialog
+        planTitle="Plano Gratuito"
+        planId="free"
+        planType="free"
+        isOpen={isDialogOpen}
+        onClose={() => setIsDialogOpen(false)}
+      />
       <Container>
         <Wrapper className="relative flex flex-col md:flex-row mx-auto w-full justify-between items-end pb-20">
           <Particles

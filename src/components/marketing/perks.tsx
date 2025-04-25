@@ -60,7 +60,7 @@ const Perks = () => {
             asChild
             size="lg"
           >
-            <Link href="">🚀 Comece Agora – Grátis e Sem Compromisso</Link>
+            <Link href="">🚀 Comece Agora</Link>
           </Button>
         </div>
       </Container>

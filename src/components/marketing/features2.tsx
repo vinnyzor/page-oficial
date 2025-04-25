@@ -88,7 +88,7 @@ export function Features2() {
             asChild
             size="lg"
           >
-            <Link href="">🚀 Comece Agora – Grátis e Sem Compromisso</Link>
+            <Link href="">🚀 Comece Agora</Link>
           </Button>
         </div>
       </Container>

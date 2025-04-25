@@ -22,7 +22,7 @@ const Hero = () => {
             </div>
             <div className="w-1.5 h-1.5 rounded-full bg-primary flex items-center justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
           </div>
-          <span className="inline-flex items-center justify-center gap-2 animate-text-gradient animate-background-shine bg-gradient-to-r from-[#cdfcfc] via-white to-[#d1fcf5] bg-[200%_auto] bg-clip-text text-sm text-transparent">
+          <span className="inline-flex items-center justify-center gap-2 animate-text-gradient animate-background-shine bg-gradient-to-r from-[#cdfcfc] via-white to-[#d1fcf5] bg-[200%_auto] bg-clip-text text-xs md:text-sm text-transparent">
             Inteligência Financeira ao Seu Alcance
             <span className="text-xs text-primary px-1.5 py-0.5 rounded-full bg-gradient-to-b from-foreground/20 to-foreground/10 flex items-center justify-center">
               Vamos Lá!
